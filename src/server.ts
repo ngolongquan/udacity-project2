@@ -35,17 +35,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       async ( req, res ) => {
         let image_url = req.query.image_url;
         if (!image_url) {
-          res.send("URL is empty");
+          res.status(422).send("URL is empty");
         }
         var validUrl = require('valid-url');        
         if (validUrl.isUri(image_url)){      
         
           let filteredpath = await filterImageFromURL(image_url);        
-          await res.sendFile(filteredpath);
+          await res.status(200).sendFile(filteredpath);
           res.on('finish',()=>deleteLocalFiles([filteredpath]));
         }         
         else {
-          res.send("Invalid URL");
+          res.status(422).send("Invalid URL");
         }
       }
   );
