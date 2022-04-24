@@ -40,9 +40,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         var validUrl = require('valid-url');        
         if (validUrl.isUri(image_url)){      
         
-          let filteredpath = await filterImageFromURL(image_url);        
-          await res.status(200).sendFile(filteredpath);
-          res.on('finish',()=>deleteLocalFiles([filteredpath]));
+          let filteredPath = await filterImageFromURL(image_url);        
+          await res.status(200).sendFile(filteredPath);
+          res.on('finish',()=>deleteLocalFiles([filteredPath]));
         }         
         else {
           res.status(422).send("Invalid URL");
